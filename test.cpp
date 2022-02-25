@@ -1,46 +1,79 @@
 #include <iostream>
 
-#define N 10
+#define N 100
 
 using namespace std;
 
-void showResult(int** arr)
+typedef int integer;
+
+
+struct Car 
 {
-    for (size_t i = 0; i < 10; i++)
-    {
-        /* code */
-        for (size_t j = 0; j < 10; j++)
-        {
-            /* code */
-            cout<<arr[i][j]<<"\t";
-        }
-        cout<<endl;
-    }
-    
+    char color[N];
+    int price;
+    char branch[N];
+};
+
+struct Pet
+{
+    char color[N];
+    int age;
+    char type[N];
+    char sex[N];
+};
+
+struct Student
+{
+    integer ID;
+    char name[N];
+    int age;
+    float mark;
+    char address[N];
+    Car car;
+    Pet pet;
+};
+
+
+void inputData(Student* arr)
+{
+    cout<<" Nhap ho ten SV: "<<endl;
+    cin.getline(arr[1].name,N);
+    cout<<" Nhap MSSV: "<<endl;
+    cin>>arr[1].ID;
+    cout<<" Nhap tuoi: "<<endl;
+    cin>>arr[1].age;
+    cout<<" Nhap diem SV: "<<endl;
+    cin>>arr[1].mark;
+    cin.ignore();
+    cout<<" Nhap dia chi SV: "<<endl;
+    cin.getline(arr[1].address,N);
+    cout<<" Nhap hang xe cua sv: "<<endl;
+    cin>>arr[1].car.branch;
+    cout<<" Nhap thu cung cua SV: "<<endl;
+    cin>>arr[1].pet.type;
+}
+
+void outputData(Student* arr)
+{
+    cout<<" =============== Student Information ================ "<<endl;
+
+    cout<<" Ho ten SV: "<<arr[1].name<<endl;
+    cout<<" MSSV: "<<arr[1].ID<<endl;
+    cout<<" Tuoi: "<<arr[1].age<<endl;
+    cout<<" Diem SV: "<<arr[1].mark<<endl;
+    cout<<" Dia chi SV: "<<arr[1].address<<endl;
+    cout<<" Hang xe cua sv: "<<arr[1].car.branch<<endl;
+    cout<<" Thu cung cua SV: "<<arr[1].pet.type<<endl;
+
+    cout<<" ==================================================== "<<endl;
 }
 
 int main()
 {
-    int** ptr = new int*[N];
+    Student arr[N];
 
-    for (size_t i = 0; i < 10; i++)
-    {
-        /* code */
-        ptr[i] = new int[N]; 
-    }
+    inputData(arr);
+    outputData(arr);
 
-    for (size_t i = 0; i < 10; i++)
-    {
-        /* code */
-        for (size_t j = 0; j < 10; j++)
-        {
-            /* code */
-            *(*(ptr+i)+j) = j+i*10;
-        }
-        
-    }
-    
-    showResult(ptr);
-    
-    return 0;
+
 }
