@@ -1,80 +1,143 @@
 #include <iostream>
+#include <cstring>
 
+#define integer int
 #define N 100
 
 using namespace std;
 
-typedef int integer;
 
-
-struct Car 
+class Student
 {
-    char color[N];
-    integer price;
-    char branch[N];
-};
+    public:
 
-struct Pet
-{
-    char color[N];
-    integer age;
-    char type[N];
-    char sex[N];
-};
-
-struct Student
-{
     integer ID;
     char name[N];
     integer age;
     float mark;
     char address[N];
-    Car car;
-    Pet pet;
+
+    Student()
+    {   
+        cout<<" Call non parameter contructor ! "<<endl;
+        this->ID = 0;
+        this->name[0] = '\0';
+        this->age = 0;
+        this->address[0] = '\0';
+        this->mark = 0;
+    }
+
+    Student(int ID, char* name, int age, float mark, char* address)
+    {
+        cout<<" Call full parameters contructor ! "<<endl;
+        this->ID = ID;
+        this->age = age;
+        this->mark = mark;
+        strcpy(this->name,name);
+        strcpy(this->address,address);
+    }
+
+
+    void showIDcard(int ID)
+    {
+
+    }
+
+    void study(char* subject)
+    {
+
+
+    }
+
+    void takeExam(char* subject)
+    {
+
+    }
+
+    void payFee(int amount)
+    {
+
+
+    }
+
+    void outputData()
+    {
+        cout<<endl;
+        cout<<" =============== Student Information ================ "<<endl;
+
+        cout<<" Ho ten SV: "<<this->name<<endl;
+        cout<<" MSSV: "<<this->ID<<endl;
+        cout<<" Tuoi: "<<this->age<<endl;
+        cout<<" Diem SV: "<<this->mark<<endl;
+        cout<<" Dia chi SV: "<<this->address<<endl;
+
+        cout<<" ==================================================== "<<endl;
+    }
+
+    ~Student()
+    {
+        cout<<" Call destructor !"<<endl; 
+    }
 };
 
 
-void inputData(Student* arr)
+class Teacher
 {
-    cout<<" Nhap ho ten SV: "<<endl;
-    cin.getline(arr->name,N);
-    cout<<" Nhap MSSV: "<<endl;
-    cin>>arr->ID;
-    cout<<" Nhap tuoi: "<<endl;
-    cin>>arr->age;
-    cout<<" Nhap diem SV: "<<endl;
-    cin>>arr->mark;
-    cin.ignore();
-    cout<<" Nhap dia chi SV: "<<endl;
-    cin.getline(arr->address,N);
-    cout<<" Nhap hang xe cua sv: "<<endl;
-    cin>>arr->car.branch;
-    cout<<" Nhap thu cung cua SV: "<<endl;
-    cin>>arr->pet.type;
-}
+    public:
 
-void outputData(Student* arr)
-{
-    cout<<endl;
-    cout<<" =============== Student Information ================ "<<endl;
+    char name[N];
+    integer age;
+    char gender[N];
+    char address[N];
 
-    cout<<" Ho ten SV: "<<(*arr).name<<endl;
-    cout<<" MSSV: "<<arr->ID<<endl;
-    cout<<" Tuoi: "<<arr->age<<endl;
-    cout<<" Diem SV: "<<arr->mark<<endl;
-    cout<<" Dia chi SV: "<<arr->address<<endl;
-    cout<<" Hang xe cua sv: "<<arr->car.branch<<endl;
-    cout<<" Thu cung cua SV: "<<arr->pet.type<<endl;
+    Teacher(char* name, integer age, char* gender, char* address)
+    {
+        strcpy(this->name,name);
+        this->age = age;
+        strcpy(this->gender,gender);
+        strcpy(this->address,address);
+    }
 
-    cout<<" ==================================================== "<<endl;
-}
+    void outputData()
+    {
+        cout<<endl;
+        cout<<" =============== Teacher Information ================ "<<endl;
+
+        cout<<" Ho ten GV: "<<this->name<<endl;
+        cout<<" Gioi tinh: "<<this->gender<<endl;
+        cout<<" Tuoi: "<<this->age<<endl;
+        cout<<" Dia chi: "<<this->address<<endl;
+
+        cout<<" ==================================================== "<<endl;
+    }
+
+    ~Teacher()
+    {
+
+    }
+
+};
 
 int main()
 {
-    Student* sPtr = new Student();
+    char* name = new char[N];
+    char* address = new char[N];
 
-    inputData(sPtr);
-    outputData(sPtr);
+    strcpy(name,"Nguyen Minh Huy");
+    strcpy(address,"TP.HCM");
 
-    delete sPtr;
+    Student s;
+    Student s1(1710111,name,23,9.9,address);
+    s1.outputData();
+
+
+    char* name1 = new char[N];
+    char* address1 = new char[N];
+    strcpy(name1,"Nguyen Vinh Hao");
+    strcpy(address1,"TP.HCM");
+    Teacher t(name1,40,"Male",address1);
+    t.outputData();
+
+
+    return 0;
 }
