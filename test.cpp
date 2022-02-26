@@ -10,14 +10,14 @@ typedef int integer;
 struct Car 
 {
     char color[N];
-    int price;
+    integer price;
     char branch[N];
 };
 
 struct Pet
 {
     char color[N];
-    int age;
+    integer age;
     char type[N];
     char sex[N];
 };
@@ -26,7 +26,7 @@ struct Student
 {
     integer ID;
     char name[N];
-    int age;
+    integer age;
     float mark;
     char address[N];
     Car car;
@@ -37,43 +37,44 @@ struct Student
 void inputData(Student* arr)
 {
     cout<<" Nhap ho ten SV: "<<endl;
-    cin.getline(arr[1].name,N);
+    cin.getline(arr->name,N);
     cout<<" Nhap MSSV: "<<endl;
-    cin>>arr[1].ID;
+    cin>>arr->ID;
     cout<<" Nhap tuoi: "<<endl;
-    cin>>arr[1].age;
+    cin>>arr->age;
     cout<<" Nhap diem SV: "<<endl;
-    cin>>arr[1].mark;
+    cin>>arr->mark;
     cin.ignore();
     cout<<" Nhap dia chi SV: "<<endl;
-    cin.getline(arr[1].address,N);
+    cin.getline(arr->address,N);
     cout<<" Nhap hang xe cua sv: "<<endl;
-    cin>>arr[1].car.branch;
+    cin>>arr->car.branch;
     cout<<" Nhap thu cung cua SV: "<<endl;
-    cin>>arr[1].pet.type;
+    cin>>arr->pet.type;
 }
 
 void outputData(Student* arr)
 {
+    cout<<endl;
     cout<<" =============== Student Information ================ "<<endl;
 
-    cout<<" Ho ten SV: "<<arr[1].name<<endl;
-    cout<<" MSSV: "<<arr[1].ID<<endl;
-    cout<<" Tuoi: "<<arr[1].age<<endl;
-    cout<<" Diem SV: "<<arr[1].mark<<endl;
-    cout<<" Dia chi SV: "<<arr[1].address<<endl;
-    cout<<" Hang xe cua sv: "<<arr[1].car.branch<<endl;
-    cout<<" Thu cung cua SV: "<<arr[1].pet.type<<endl;
+    cout<<" Ho ten SV: "<<(*arr).name<<endl;
+    cout<<" MSSV: "<<arr->ID<<endl;
+    cout<<" Tuoi: "<<arr->age<<endl;
+    cout<<" Diem SV: "<<arr->mark<<endl;
+    cout<<" Dia chi SV: "<<arr->address<<endl;
+    cout<<" Hang xe cua sv: "<<arr->car.branch<<endl;
+    cout<<" Thu cung cua SV: "<<arr->pet.type<<endl;
 
     cout<<" ==================================================== "<<endl;
 }
 
 int main()
 {
-    Student arr[N];
+    Student* sPtr = new Student();
 
-    inputData(arr);
-    outputData(arr);
+    inputData(sPtr);
+    outputData(sPtr);
 
-
+    delete sPtr;
 }
