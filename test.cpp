@@ -1,138 +1,125 @@
 #include <iostream>
 #include <cstring>
 
-#define integer int
 #define N 100
 
-using namespace std;
+typedef int integer;
 
+using namespace std;
 
 class Student
 {
     private:
     integer ID;
     char name[N];
-    integer age;
-    float mark;
     char address[N];
-
-    public:
-    Student();
-    Student(int ID, char* name, int age, float mark, char* address);
-    void outputData();
-    
-
-    ~Student()
-    {
-        
-    }
-};
-
-
-class Teacher
-{
-    private:
-
-    char name[N];
-    integer age;
     char gender[N];
-    char address[N];
+    float mark;
 
     public:
+    Student(integer ID, char* name, char* address, char* gender, float mark);
+    void showResult();
+    void setID(integer ID);
+    void setName(char* name);
+    void setAddress(char* address);
+    void setGender(char* gender);
+    void setMark(float mark);
 
-    Teacher(char* name, integer age, char* gender, char* address);
-
-    void outputData();
-
-    ~Teacher()
-    {
-
-    }
+    integer getID();
+    char* getName();
+    char* getAddress();
+    char* getGender();
+    float getMark(); 
 
 };
 
-Teacher::Teacher(char* name, integer age, char* gender, char* address)
-    {
-        strcpy(this->name,name);
-        this->age = age;
-        strcpy(this->gender,gender);
-        strcpy(this->address,address);
-    }
+void Student::setID(integer ID){
+    this->ID = ID;
+}
 
-void Teacher::outputData()
-    {
-        cout<<endl;
-        cout<<" =============== Teacher Information ================ "<<endl;
+void Student::setName(char* name){
+    strcpy(this->name,name);
 
-        cout<<" Ho ten GV: "<<this->name<<endl;
-        cout<<" Gioi tinh: "<<this->gender<<endl;
-        cout<<" Tuoi: "<<this->age<<endl;
-        cout<<" Dia chi: "<<this->address<<endl;
+}
 
-        cout<<" ==================================================== "<<endl;
-    }
+void Student::setAddress(char* address){
+    strcpy(this->address,address);
 
+}
 
-Student::Student()
-    {   
-        this->ID = 0;
-        this->name[0] = '\0';
-        this->age = 0;
-        this->address[0] = '\0';
-        this->mark = 0;
-    }
+void Student::setGender(char* gender){
+    strcpy(this->gender,gender);
 
-Student::Student(int ID, char* name, int age, float mark, char* address)
-    {
-        this->ID = ID;
-        this->age = age;
-        this->mark = mark;
-        strcpy(this->name,name);
-        strcpy(this->address,address);
-    }
+}
 
-void Student::outputData()
-    {
-        cout<<endl;
-        cout<<" =============== Student Information ================ "<<endl;
+void Student::setMark(float mark){
+    this->mark = mark;
+}
 
-        cout<<" Ho ten SV: "<<this->name<<endl;
-        cout<<" MSSV: "<<this->ID<<endl;
-        cout<<" Tuoi: "<<this->age<<endl;
-        cout<<" Diem SV: "<<this->mark<<endl;
-        cout<<" Dia chi SV: "<<this->address<<endl;
+integer Student::getID(){
+    return this->ID;
+}
 
-        cout<<" ==================================================== "<<endl;
-    }
+char* Student::getName(){
+    return this->name;
+}
 
+char* Student::getAddress(){
+    return this->address;
+}
+
+char* Student::getGender(){
+    return this->gender;
+}
+
+float Student::getMark(){
+    return this->mark;
+}
+
+Student::Student(integer ID, char* name, char* address, char* gender, float mark)
+{
+    this->ID = ID;
+    strcpy(this->name,name);
+    strcpy(this->address,address);
+    strcpy(this->gender,gender);
+    this->mark = mark;
+}
+
+void Student::showResult()
+{
+    cout<<endl;
+    cout<<" =============== Student Information =============== "<<endl;
+    cout<<" Student ID   : "<<this->ID<<endl;
+    cout<<" Student name : "<<this->name<<endl;
+    cout<<" Gender       : "<<this->gender<<endl;
+    cout<<" Address      : "<<this->address<<endl;
+    cout<<" Mark         : "<<this->mark<<endl;
+    cout<<" =================================================== "<<endl;
+}
 
 
 int main()
 {
+    int ID = 1710111;
     char* name = new char[N];
+    char* gender = new char[N];
     char* address = new char[N];
+    float mark = 9.9;
 
-    strcpy(name,"Nguyen Minh Huy");
+    strcpy(name,"Nguyen Minh Huyyyyy");
+    strcpy(gender,"Male");
     strcpy(address,"TP.HCM");
 
-    Student s;
-    Student s1(1710111,name,23,9.9,address);
-    s1.outputData();
+    Student student(ID,name,gender,address,mark);
 
+    strcpy(name,"Nguyen Minh Huy");
+    student.setID(1710111);
+    student.setName(name);
+    student.setMark(10);
 
-    char* name1 = new char[N];
-    char* address1 = new char[N];
-    char* gender = new char[N];
+    student.showResult();
 
-    strcpy(name1,"Nguyen Vinh Hao");
-    strcpy(address1,"TP.HCM");
-    strcpy(gender,"Male");
+    delete name,gender,address;
 
-    Teacher t(name1,50,gender,address1);
-    t.outputData();
-
-
-    delete name, address, name1, address1;
-    
     return 0;
 }
