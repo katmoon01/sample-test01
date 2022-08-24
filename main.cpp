@@ -1,34 +1,26 @@
 #include <iostream>
-#include <functional>
 #include <memory>
 
 using namespace std;
 
-class Class1
+struct Class1 
 {
-    int x, y;
-    public:
-
-    Class1(int a, int b): x(a),y(b){};
-
-    int Invoke(function<int(int,int)> Fx)
+    int x;
+public:
+    Class1(int a):x(a){};
+    int operator() (int y)
     {
-        return Fx(this->x,this->y);
+        cout<<"Inside operator"<<endl;
+        return x+y;
     }
 
 };
 
-int add(int a, int b)
-{
-    return a+b; 
-}
-
-
 int main()
 {
-    auto Ptr = make_shared<Class1>(99,100);
-    
-    cout<<"Result: "<<Ptr->Invoke(add)<<endl;
+    Class1 class1(9);
+    int val = class1(10);
 
+    cout<<val<<endl;
     return 0;
 }
