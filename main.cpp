@@ -1,40 +1,43 @@
 #include <iostream>
-#include <memory>
-
+#include <string>
 using namespace std;
 
-class Class1
+struct Node
 {
-    int x,y,z;
-public:
-    Class1(int a, int b, int c): x(a),y(b),z(c){};
-    auto GetX();
-    auto GetY();
-    auto GetZ();
-    ~Class1(){cout<<"Destructor was called"<<endl;}
+    int data;
+    Node *next;
 };
-
-auto Class1::GetX(){return this->x;}
-auto Class1::GetY(){return this->y;}
-auto Class1::GetZ(){return this->z;}
-
-template<typename First>
-inline void Func(First first){first++;cout<<first<<endl;}
-
-template<typename First, typename... Rest>
-inline void Func(First first,Rest... rest)
-{
-    first += 1;
-    cout<<first<<endl;
-    Func(rest...);
-}
 
 int main()
 {
-    auto Ptr = make_shared<Class1>(1,2,3);
+    Node *head = new Node();
+    head->data = 1;
+    head->next = NULL;
 
-    auto lamb = [=](){Func(Ptr->GetX(),Ptr->GetY(),Ptr->GetZ());};
-    lamb();
+    Node *second = new Node();
+    second->data = 2;
+    second->next = NULL;
+
+    Node *third = new Node();
+    third->data = 3;
+    third->next = NULL; 
+
+    //Link every node together
+    head->next   = second;
+    second->next = third;
+    third->next  = NULL;
+
+    //Access to node
+    int data = 0;
+
+    Node *p = head;
+    while(p!=nullptr)
+    {
+        data = p->data;
+        p = p->next;
+        cout<<data<<"->";
+    }
+    cout<<"NULL"<<endl;
 
     return 0;
 }
